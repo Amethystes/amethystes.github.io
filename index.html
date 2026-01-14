@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Unity</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Nova Cut",system-ui,sans-serif;
+}
+
+body{
+  background:#000;
+  color:#fff;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* PARTICLES */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+/* CENTER CONTENT */
+.center{
+  position:relative;
+  z-index:2;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  transform:translateY(-6px);
+}
+
+/* LOGO */
+.logo{
+  width:130px;
+  height:130px;
+  opacity:0;
+  animation:logoPop 1s ease forwards;
+  filter:drop-shadow(0 0 26px rgba(255,255,255,.4));
+}
+@keyframes logoPop{
+  0%{transform:scale(.65);opacity:0}
+  70%{transform:scale(1.05);opacity:1}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* TITLE */
+.title{
+  margin-top:22px;
+  font-size:2.8rem;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  opacity:0;
+  animation:titleIn 1s ease forwards;
+  animation-delay:1s;
+}
+@keyframes titleIn{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* SEARCH */
+.search-wrap{
+  margin-top:26px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  opacity:0;
+  animation:searchIn .8s ease forwards;
+  animation-delay:1.4s;
+}
+@keyframes searchIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.search-box{
+  width:420px;
+  max-width:90%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  backdrop-filter:blur(14px);
+}
+.search-box svg{
+  width:18px;
+  height:18px;
+  fill:#fff;
+  opacity:.7;
+}
+.search-box input{
+  flex:1;
+  background:none;
+  border:none;
+  outline:none;
+  color:#fff;
+  font-size:.9rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.search-box input::placeholder{
+  color:rgba(255,255,255,.45);
+}
+
+/* SUBTEXT */
+.subtitle{
+  margin-top:16px;
+  font-size:.8rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  opacity:.6;
+  animation:titleIn 1s ease forwards;
+  animation-delay:1.7s;
+}
+
+/* NAV BAR */
+.nav{
+  position:fixed;
+  bottom:26px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:10;
+  display:flex;
+  gap:20px;
+  padding:14px 22px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:26px;
+  opacity:0;
+  animation:navIn .8s ease forwards;
+  animation-delay:2s;
+}
+@keyframes navIn{
+  from{opacity:0;transform:translate(-50%,18px)}
+  to{opacity:1;transform:translate(-50%,0)}
+}
+.nav a{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.25s ease;
+}
+.nav a:hover{
+  transform:translateY(-6px) scale(1.1);
+  box-shadow:0 0 18px rgba(255,255,255,.25);
+}
+.nav svg{
+  width:22px;
+  height:22px;
+  fill:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="center">
+  <img src="logo.png" class="logo" alt="Network Unity">
+
+  <div class="title">Network Unity</div>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24">
+        <path d="M21 20l-5.2-5.2a7 7 0 1 0-1.4 1.4L20 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/>
+      </svg>
+      <input type="text" placeholder="Search the web">
+    </div>
+  </div>
+
+  <div class="subtitle">Unified • Connected • Alive</div>
+</div>
+
+<nav class="nav">
+  <a href="index.html" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-12v-9h-3z"/></svg>
+  </a>
+
+  <a href="g.html" title="Games">
+    <svg viewBox="0 0 24 24">
+      <path d="M7 10h10a4 4 0 0 1 4 4v2a3 3 0 0 1-3 3h-1l-2-2h-6l-2 2h-1a3 3 0 0 1-3-3v-2a4 4 0 0 1 4-4z"/>
+    </svg>
+  </a>
+
+  <a href="ai.html" title="AI">
+    <svg viewBox="0 0 24 24">
+      <path d="M9 2v2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3h-2V2h-2v2h-2V2z"/>
+      <circle cx="9" cy="11" r="1.2"/>
+      <circle cx="15" cy="11" r="1.2"/>
+      <path d="M9 15h6"/>
+    </svg>
+  </a>
+
+  <a href="settings.html" title="Settings">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 8a4 4 0 1 0 0 8z"/>
+      <path d="M2 12h2m16 0h2M12 2v2m0 16v2"/>
+    </svg>
+  </a>
+</nav>
+
+<script>
+/* PARTICLES */
+const canvas=document.getElementById("particles"),ctx=canvas.getContext("2d");
+let w,h;
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+addEventListener("resize",resize);resize();
+
+const particles=[...Array(90)].map(()=>({
+  x:Math.random()*w,
+  y:Math.random()*h,
+  r:Math.random()*1.4+.4,
+  vx:(Math.random()-.5)*.28,
+  vy:(Math.random()-.5)*.28
+}));
+
+(function animate(){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="rgba(255,255,255,.85)";
+  particles.forEach(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    if(p.x<0||p.x>w)p.vx*=-1;
+    if(p.y<0||p.y>h)p.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+})();
+</script>
+
+</body>
+</html>
