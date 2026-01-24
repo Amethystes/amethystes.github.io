@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Network Unity Proxy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="icon" href="logo.png">
+
+<!-- Nova Cut -->
+<link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet">
+
+<!-- Ultraviolet -->
+<script src="/s/uv/uv.bundle.js"></script>
+<script src="/s/uv/uv.config.js"></script>
+<script src="/s/register-sw.js"></script>
+<script src="/s/search.js"></script>
+
+<style>
+*{box-sizing:border-box;font-family:"Nova Cut",system-ui,sans-serif}
+
+body{
+  margin:0;
+  height:100vh;
+  background:#000;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+/* TOP BAR */
+.topbar{
+  display:flex;
+  gap:12px;
+  padding:14px;
+  background:rgba(15,8,30,.95);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.topbar input{
+  flex:1;
+  padding:14px 16px;
+  border-radius:14px;
+  border:none;
+  outline:none;
+  background:#0c0520;
+  color:white;
+  letter-spacing:.1em;
+}
+
+.topbar button{
+  padding:14px 20px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#6d28d9,#a855f7);
+  color:white;
+}
+
+/* BROWSER FRAME */
+iframe{
+  flex:1;
+  width:100%;
+  border:none;
+  background:black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <input id="address" placeholder="Search or enter a URL">
+  <button onclick="go()">Go</button>
+</div>
+
+<iframe id="browser"></iframe>
+
+<script>
+const iframe = document.getElementById("browser");
+const input = document.getElementById("address");
+
+function go(){
+  let value = input.value.trim();
+  if(!value) return;
+
+  // use Ultraviolet search / URL handling
+  const url = __uv$config.prefix + __uv$config.encodeUrl(
+    Ultraviolet.utils.isUrl(value)
+      ? value
+      : "https://www.google.com/search?q=" + encodeURIComponent(value)
+  );
+
+  iframe.src = url;
+}
+
+// enter key support
+input.addEventListener("keydown", e=>{
+  if(e.key==="Enter") go();
+});
+</script>
+
+</body>
+</html>
